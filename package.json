@@ -1,0 +1,30 @@
+{
+  "name": "discord-bot-cloudflare-slash",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "ngrok": "ngrok http 8787",
+    "deploy": "wrangler publish",
+    "sync": "slash-up sync",
+    "sync:dev": "slash-up sync -e development",
+    "lint": "pnpm eslint && pnpm prettier",
+    "eslint": "eslint --ext .ts .",
+    "prettier": "prettier src --check"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240129.0",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "ngrok": "^5.0.0-beta.2",
+    "prettier": "^3.2.4",
+    "slash-create": "^6.0.1",
+    "slash-up": "^1.4.2",
+    "wrangler": "^3.25.0"
+  },
+  "engines": {
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  }
+}

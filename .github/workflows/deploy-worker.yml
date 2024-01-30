@@ -1,0 +1,64 @@
+name: Deploy Worker
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: 'deploy'
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: lts/*
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DEVELOPMENT_GUILD_ID: ${{ secrets.DEVELOPMENT_GUILD_ID }}
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Sync Commands (Guild)
+        run: >
+          pnpm sync
+          -i ${{ secrets.DISCORD_APP_ID }}
+          -t ${{ secrets.DISCORD_BOT_TOKEN }}
+          -g ${{ secrets.DEVELOPMENT_GUILD_ID }}
+        if: ${{ env.DEVELOPMENT_GUILD_ID != '' }}
+
+      - name: Sync Commands
+        run: >
+          pnpm sync
+          -i ${{ secrets.DISCORD_APP_ID }}
+          -t ${{ secrets.DISCORD_BOT_TOKEN }}
+
+      - name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          secrets: |
+            DISCORD_APP_ID
+            DISCORD_PUBLIC_KEY
+            DISCORD_BOT_TOKEN
+        env:
+          DISCORD_APP_ID: ${{ secrets.DISCORD_APP_ID }}
+          DISCORD_PUBLIC_KEY: ${{ secrets.DISCORD_PUBLIC_KEY }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
