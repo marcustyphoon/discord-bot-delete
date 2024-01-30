@@ -1,5 +1,5 @@
 {
-  "name": "discord-bot-cloudflare-slash",
+  "name": "discord-bot-delete-example",
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev",

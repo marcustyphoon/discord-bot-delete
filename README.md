@@ -1,12 +1,10 @@
-# /create with Cloudflare Workers
+# Discord Bot Example: Delete command
 
-A [slash-create](https://npm.im/slash-create) template, using [Cloudflare Workers](https://workers.cloudflare.com). Based off of [Snazzah/slash-create-worker](https://github.com/Snazzah/slash-create-worker), but with a Github Actions workflow to automatically deploy (the repository serves as a single source of truth).
+Want to allow your users to delete messages in a channel/based on some specific criteria or without also giving them the ability to pin? Okay, I dunno why that would be the case.
 
-Commands are synced to Discord on every push using [Snazzah/slash-up](https://github.com/Snazzah/slash-up) and bot code is deployed to Cloudflare using [cloudflare/wrangler-action](https://github.com/cloudflare/wrangler-action)
+Whatever. This bot adds a command to the "apps" menu on a message that deletes it. Created with [slash-create](https://npm.im/slash-create) on [Cloudflare Workers](https://workers.cloudflare.com).
 
-## Getting Started
-
-After using this template, update the project name in `wrangler.toml` (and `package.json`). This name will be used for your project deployment in the Cloudflare dashboard and in your worker URL.
+---
 
 Create a Discord application with a bot user at [https://discord.com/developers/applications](https://discord.com/developers/applications) (see https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers).
 
