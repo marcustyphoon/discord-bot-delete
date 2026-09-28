@@ -7,25 +7,27 @@
     "deploy": "wrangler publish",
     "sync": "slash-up sync",
     "sync:dev": "slash-up sync -e development",
-    "lint": "pnpm eslint && pnpm prettier",
+    "lint": "npm run eslint && npm run prettier",
     "eslint": "eslint --ext .ts .",
     "prettier": "prettier src --check"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240620.0",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.0.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
+    "@typescript-eslint/eslint-plugin": "^8.70.1",
+    "@typescript-eslint/parser": "^8.70.1",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
     "ngrok": "^5.0.0-beta.2",
-    "prettier": "^3.3.2",
-    "slash-create": "^6.1.4",
+    "prettier": "^3.9.9",
+    "slash-create": "^6.8.1",
     "slash-up": "^1.4.2",
-    "wrangler": "^3.61.0"
+    "wrangler": "^3.114.17"
   },
-  "packageManager": "pnpm@10.34.5+sha512.a4ee05f2f73658255bd6a89859c065a45c28a57daefae2c893a168ee2b73168c37b91e83e57ea67654ad03f03031746430e8bce38e362e042605fb8abc80192e",
-  "engines": {
-    "npm": "please-use-pnpm",
-    "yarn": "please-use-pnpm"
+  "allowScripts": {
+    "esbuild": true,
+    "fsevents": true,
+    "ngrok": true,
+    "sharp": true,
+    "workerd": true
   }
 }

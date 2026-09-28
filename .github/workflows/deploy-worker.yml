@@ -23,19 +23,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up PNPM
-        uses: pnpm/action-setup@v2
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
+          cache: npm
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Sync Commands (Guild)
         run: >
-          pnpm sync
+          npm run sync
           -i ${{ secrets.DISCORD_APP_ID }}
           -t ${{ secrets.DISCORD_BOT_TOKEN }}
           -g ${{ secrets.DEVELOPMENT_GUILD_ID }}
@@ -43,7 +41,7 @@ jobs:
 
       - name: Sync Commands
         run: >
-          pnpm sync
+          npm run sync
           -i ${{ secrets.DISCORD_APP_ID }}
           -t ${{ secrets.DISCORD_BOT_TOKEN }}
 
